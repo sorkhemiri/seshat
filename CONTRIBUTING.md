@@ -2,7 +2,7 @@
 *We love your input!*  
 We want to make contributing to this project as easy and transparent as possible
 
-##First Setup
+## First Setup
 ### 1. clone the development branch on your system
 
 run:
