@@ -50,6 +50,12 @@ black:
 
 build: venv docker flake8 test run
 
+.ONESHELL:
+test:
+	$(VIRTUAL_ENV)/bin/pytest src
+
+build: venv docker flake8 test run
+
 help:
 	@echo "Usage:"
 	@echo "  make venv - create virtual environment for the project"
