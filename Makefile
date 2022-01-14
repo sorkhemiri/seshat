@@ -54,6 +54,10 @@ build: venv docker flake8 test run
 test:
 	$(VIRTUAL_ENV)/bin/pytest src
 
+.ONESHELL:
+run:
+	$(VIRTUAL_ENV)/bin/python src/app.py
+
 build: venv docker flake8 test run
 
 help:
