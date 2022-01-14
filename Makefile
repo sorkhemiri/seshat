@@ -20,7 +20,7 @@ REDIS_PORT=6379
 venv:
 	rm -rf $(VIRTUAL_ENV) && python3 -m venv $(VIRTUAL_ENV)
 	$(VIRTUAL_ENV)/bin/pip3 install --upgrade pip wheel setuptools
-	$(VIRTUAL_ENV)/bin/pip3 install --compile --upgrade --force-reinstall --requirement requirements.txt
+	$(VIRTUAL_ENV)/bin/pip3 install --compile --upgrade --force-reinstall --requirement dev-requirements.txt
 
 docker: docker.down docker.up docker.log
 
@@ -40,6 +40,14 @@ docker.stop:
 docker.down:
 	docker-compose -f dev-docker-compose.yml down --volumes --rmi local  --remove-orphans
 
+.ONESHELL:
+flake8:
+	$(VIRTUAL_ENV)/bin/flake8 src
+
+.ONESHELL:
+black:
+	$(VIRTUAL_ENV)/bin/black --line-length 88 --pyi --skip-string-normalization --safe src
+
 help:
 	@echo "Usage:"
 	@echo "  make venv - create virtual environment for the project"
@@ -48,4 +56,6 @@ help:
 	@echo "  make docker.stop - dev environment docker-compose stop"
 	@echo "  make docker.log - dev environment docker-compose log"
 	@echo "  make docker.down - dev environment docker-compose down"
+	@echo "  make flake8 - run flake8 on the project"
+	@echo "  make black - run black on the project"
 
