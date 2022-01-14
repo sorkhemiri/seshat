@@ -21,7 +21,7 @@ run:
 
 or
 
-`make docker`
+`make build`
 
 ### 3. set up VENV
 
@@ -31,18 +31,18 @@ or create with  `pip3.9 -m venv .venv`
 
 we have two requirements file
 
-`requirements.txt` for development purposes. this file has a link to the `requirements-prod.txt` file
+`dev-requirements.txt` for development purposes. this file has a link to the `requirements.txt` file
 
-`requirements-prod.txt` for production
+`requirements.txt` for production
 
 ### 4. create local settings
-before running the app you need to create a file in the `src/core/settings/local.py` path. all settings from this file will be overridden to development or production settings. `src/core/settings/local.py` is in `.gitignore` So your changes will not be pushed.
+if not using Makefile for build, before running the app you need to create a `.env` file in project root just like `.env.example` file. all environment variables in this file will be overridden to os environ. `.env` is in `.gitignore` So your changes will not be pushed.
 
 ### 5. run the web app
 
 after activating your VENV run
 
-`cd src` and `python manage.py runserver`
+`cd src` and `python app.py`
 
 ##Contribution
 ### Fixing a bug  
@@ -98,7 +98,7 @@ Always check the project in Sentry for any exceptions
 
 Use a Consistent Coding Style  
 We use **PEP 8** -- Style Guide for Python Code. So make sure you follow it as well.  
-We use **black** as styling tool. So make sure you run `black .` before every commit.
+We use **black** as styling tool. So make sure you run `make black` or `black path/to/file` before every commit.
 
 ### Note
-Check README.md for more info and see how things work.
+Check [README.md](README.md) for more info and see how things work.

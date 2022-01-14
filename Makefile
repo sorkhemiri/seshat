@@ -22,7 +22,7 @@ venv:
 	$(VIRTUAL_ENV)/bin/pip3 install --upgrade pip wheel setuptools
 	$(VIRTUAL_ENV)/bin/pip3 install --compile --upgrade --force-reinstall --requirement dev-requirements.txt
 
-docker: docker.down docker.up docker.log
+docker: docker.down docker.up
 
 .ONESHELL:
 docker.up:
@@ -48,6 +48,8 @@ flake8:
 black:
 	$(VIRTUAL_ENV)/bin/black --line-length 88 --pyi --skip-string-normalization --safe src
 
+build: venv docker flake8 test run
+
 help:
 	@echo "Usage:"
 	@echo "  make venv - create virtual environment for the project"
@@ -58,4 +60,6 @@ help:
 	@echo "  make docker.down - dev environment docker-compose down"
 	@echo "  make flake8 - run flake8 on the project"
 	@echo "  make black - run black on the project"
-
+	@echo "  make test - run automated tests"
+	@echo "  make run - run server"
+	@echo "  make build - build the project"
